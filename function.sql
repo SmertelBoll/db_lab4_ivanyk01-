@@ -1,15 +1,21 @@
--- Функція, яка виводить кількість електростанцій у країні
+-- Функція, яка виводить назву електростанції певного власника
 
-CREATE OR REPLACE FUNCTION get_count_of_powerplants(country_arg varchar(50))
-RETURNS NUMERIC
+
+CREATE OR REPLACE FUNCTION get_name_by_owner(own_name varchar(255))
+RETURNS VARCHAR(255)
 LANGUAGE 'plpgsql'
 AS $$
-DECLARE powerplants NUMERIC;
 
 BEGIN
-	powerplants := (SELECT COUNT(id) FROM powerplants WHERE country = country_arg);
-	RETURN powerplants;
+
+    RETURN (SELECT name
+            FROM powerplants
+            JOIN owners on powerplants.owner = owners.owner_id 
+            WHERE owners.owner_name = own_name
+            GROUP BY powerplants.name);
 END;
 $$;
 
-SELECT get_count_of_powerplants('United States of America');
+SELECT get_name_by_owner('SunRay Power LLC');
+
+SELECT get_name_by_owner('PAR Renewables');

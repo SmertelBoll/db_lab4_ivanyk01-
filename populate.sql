@@ -24,7 +24,3 @@ VALUES ('WRI1002017', '10 De Octubre (nuevitas) Powerplant', 'Cuba', 280.0, 21.5
 ('USA0007770', '1515 S Caron Road', 'United States of America', 4.2, 41.9084, -89.0466, 8, 4),
 ('USA0060542', '158th Fighter Wing Solar Farm', 'United States of America', 1.3, 44.4777, -73.1534, 9, 3),
 ('USA0058187', '180 Raritan Solar', 'United States of America', 1.9, 40.5161, -74.34, 10, 3);
-
-
-
-

@@ -1,17 +1,18 @@
--- Процедура, яка створює нову таблицю з даними про назви електростанцій для переданого значення типу палива
+-- Процедура, яка створює нову таблицю з даними про назви електростанцій для переданого імені власника
 
-CREATE OR REPLACE PROCEDURE new_table(fuel varchar(50))
+CREATE OR REPLACE PROCEDURE new_table(own varchar(255))
 LANGUAGE 'plpgsql'
 AS $$
 BEGIN
-	DROP TABLE IF EXISTS powerplants_by_fuel;
-	CREATE TABLE powerplants_by_fuel
+	DROP TABLE IF EXISTS powerplants_by_own;
+	CREATE TABLE powerplants_by_own
 	AS
-	(SELECT id, name, fuel_name FROM powerplants 
-	 JOIN fuels ON fuels.fuel_id = powerplants.fuel_type
-	 WHERE fuel_name = fuel);
+	(SELECT id, name, owner FROM powerplants 
+	 JOIN owners ON owners.owner_id = powerplants.owner
+	 WHERE owner_name = own);
 END;
 $$;
 
-CALL new_table('gas');
-select * from powerplants_by_fuel;
+CALL new_table('PAR Renewables');
+
+SELECT * FROM powerplants_by_own;
